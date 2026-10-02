@@ -4,25 +4,22 @@ phases:
   install:
     runtime-versions:
       java: corretto8
-
   pre_build:
     commands:
-      - echo Logging in to AWS CodeArtifact...
-      - CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain learningdomainnnn --domain-owner 496780243960 --region us-east-1 --query authorizationToken --output text`
-      - export CODEARTIFACT_AUTH_TOKEN
-
+      - echo Initializing environment
+      - export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain nextwork --domain-owner $(aws sts get-caller-identity --query 'Account' --output text) --query authorizationToken --output text`
   build:
     commands:
       - echo Build started on `date`
-      - mvn clean install -s settings.xml
-
+      - mvn -s settings.xml compile
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Packaging artifacts...
-      - mvn package -s settings.xml
+      - mvn -s settings.xml package
 
 artifacts:
   files:
-    - target/*.war
+    - target/nextwork-web-project.war
+    - appspec.yml
+    - scripts/**/*
   discard-paths: no
