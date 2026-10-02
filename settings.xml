@@ -1,0 +1,14 @@
+<profiles>
+  <profile>
+    <id>learningdomainnnn-latest-one</id>
+    <activation>
+      <activeByDefault>true</activeByDefault>
+    </activation>
+    <repositories>
+      <repository>
+        <id>learningdomainnnn-latest-one</id>
+        <url>https://learningdomainnnn-496780243960.d.codeartifact.us-east-1.amazonaws.com/maven/latest-one/</url>
+      </repository>
+    </repositories>
+  </profile>
+</profiles>
